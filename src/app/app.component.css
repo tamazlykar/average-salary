@@ -1,0 +1,118 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.app-container {
+  width: 50%;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.header {
+  background-color: #7c2020;
+  padding-bottom: 20px;
+  color: rgb(247, 247, 247);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.serach {
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  padding: 5px;
+  padding-left: 8px;
+  border: 1px solid rgb(189, 189, 189);
+}
+
+.serach button {
+  background-image: url(/assets/search.png);
+  border: 0;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+}
+
+.serach button:focus {
+  outline: none;
+}
+
+.serach input {
+  border: 0;
+  font-size: 16px;
+  width: 300px;
+}
+
+.serach input:focus {
+  outline: none;
+}
+
+.analytics {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-align: center;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.min-block, .max-block, .average-block, .block {
+  padding: 10px;
+}
+
+.salary {
+  color: rgb(116, 0, 0);
+  font-size: 22px;
+}
+
+.analytics-text {
+  color: rgb(119, 119, 119);
+  font-size: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  height: 300px;
+  overflow: auto;
+  padding-top: 15px;
+  width: 400px;
+}
+
+.list .item {
+  padding: 5px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.footer img {
+  width: 30px;
+  height: 30px;
+  padding-left: 5px;
+}
+
+h1 {
+  text-align: center;
+  padding: 10px;
+}
+
+p {
+  margin: 0;
+}

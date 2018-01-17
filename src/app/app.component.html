@@ -1,20 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
 
+    <div class="header">
+      <h1>Average Salary</h1>
+      <div class="center">
+        <div class="search">
+          <input type="text" #searchBox (keyup.enter)="search(searchBox.value)">
+          <button (click)="search(searchBox.value)"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="analytics" *ngIf="showAnalytics">
+      <div class="columns">
+          <div class="min-block">
+              <p class="salary">{{ minSalary | salary }}</p>
+              <p class="analytics-text">Минимум</p>
+          </div>
+          <div class="average-block">
+            <div class="block">
+              <p class="salary">{{ medianSalary?.from | salary }} - {{ medianSalary?.to | salary }}</p>
+              <p class="analytics-text">Медиана</p>
+            </div>
+            <div class="block">
+              <p class="salary">{{ averageSalary?.from | salary }} - {{ averageSalary?.to | salary }}</p>
+              <p class="analytics-text">Среднее арифметическое</p>
+            </div>
+          </div>
+          <div class="max-block">
+              <p class="salary">{{ maxSalary | salary }}</p>
+              <p class="analytics-text">Максимум</p>
+          </div>
+      </div>
+      <p>
+        Рассчитано на основе {{ count }} доступных вакансий для г. Томска:
+      </p>
+    </div>
+
+    <div class="list" *ngIf="showAnalytics">
+      <div *ngFor="let v of vacancies" class="item">
+        {{ v.name }}
+      </div>
+    </div>
+
+
+    <div class="footer">
+      <p>Powered by:</p><img src="/assets/min-hh-red.png">
+    </div>
+
+</div>
