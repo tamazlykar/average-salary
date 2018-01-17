@@ -1,11 +1,20 @@
-node {
-  stage('Unit Testing') {
-    echo 'Init Testing'
-  }
-  stage('Integration Testing') {
-    echo 'Integration Testing'
-  }
-  stage('System Testing') {
-    echo 'System Testing'
+pipeline {
+  agent any
+  stages {
+    stage('Unit Testing') {
+      steps {
+        echo 'Unit Testing'
+      }
+    }
+    stage('Integration Testing') {
+      steps {
+        echo 'Integration Testing'
+      }
+    }
+    stage('System Testing') {
+      steps {
+        echo 'System Testing'
+      }
+    }
   }
 }
