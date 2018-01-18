@@ -20,13 +20,13 @@ pipeline {
 
     stage('Unit and Integration Testing') {
       steps {
-          sh 'npm run test -- --single-run --no-progress --browser=ChromeNoSandbox'
+          sh 'xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox'
       }
     }
 
     stage('System Testing') {
       steps {
-          sh 'npm run e2e -- --no-progress --config=protractor-ci.conf.js'
+          sh 'xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js'
       }
     }
 
