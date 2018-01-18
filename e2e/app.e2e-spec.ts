@@ -24,12 +24,14 @@ describe('Average Salary App', () => {
 
   it('search box should send request with Enter key', () => {
     page.getSearchInput().sendKeys('JavaScript', protractor.Key.ENTER);
+    browser.waitForAngular();
     expect(page.getAnalyticsBlock().isPresent()).toBeTruthy();
   });
 
   it('search box should send request with button', () => {
     page.getSearchInput().sendKeys('JavaScript');
     page.getSearchButton().click();
+    browser.waitForAngular();
     expect(page.getAnalyticsBlock().isPresent()).toBeTruthy();
   });
 
