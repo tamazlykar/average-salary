@@ -1,20 +1,34 @@
-node {
-  deleteDir()
-  checkout scm
-
-  stage('NPM install') {
-    sh 'npm install'
+pipeline {
+  agent {
+    docker {
+      image 'node:8.9.4-alpine'
+    }
   }
 
-  stage('Unit and Integration Testing') {
-      sh 'npm run test -- --single-run --no-progress --browser=ChromeNoSandbox'
-  }
+  stages {
+    stage('Dependency installation') {
+      steps {
+          sh 'npm install'
+      }
+    }
 
-  stage('System Testing') {
-      sh 'npm run e2e -- --no-progress --config=protractor-ci.conf.js'
-  }
+    stage('Linting') {
+      steps {
+        sh 'npm run lint'
+      }
+    }
 
-  stage('Lint') {
-    sh 'npm run lint'
+    stage('Unit and Integration Testing') {
+      steps {
+          sh 'npm run test -- --single-run --no-progress --browser=ChromeNoSandbox'
+      }
+    }
+
+    stage('System Testing') {
+      steps {
+          sh 'npm run e2e -- --no-progress --config=protractor-ci.conf.js'
+      }
+    }
+
   }
 }
