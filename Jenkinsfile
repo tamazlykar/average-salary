@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'hortonworks/docker-e2e-protractor'
+      image 'angular/ngcontainer'
     }
   }
 
