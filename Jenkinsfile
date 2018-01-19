@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'angular/ngcontainer'
+      image 'trion/ng-cli-e2e'
     }
   }
 
