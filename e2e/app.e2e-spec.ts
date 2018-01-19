@@ -24,7 +24,7 @@ describe('Average Salary App', () => {
 
   it('search box should send request with Enter key', () => {
     page.getSearchInput().sendKeys('JavaScript', protractor.Key.ENTER);
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {}, 2000);
     // const EC = protractor.ExpectedConditions;
     // browser.wait(EC.visibilityOf(page.getAnalyticsBlock()), 10000);
     expect(page.getAnalyticsBlock().isPresent()).toBe(true);
@@ -33,7 +33,7 @@ describe('Average Salary App', () => {
   it('search box should send request with button', () => {
     page.getSearchInput().sendKeys('JavaScript');
     page.getSearchButton().click();
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {}, 2000);
     // const EC = protractor.ExpectedConditions;
     // browser.wait(EC.visibilityOf(page.getAnalyticsBlock()), 10000);
     expect(page.getAnalyticsBlock().isPresent()).toBeTruthy();
