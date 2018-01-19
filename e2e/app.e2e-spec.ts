@@ -24,9 +24,9 @@ describe('Average Salary App', () => {
 
   it('search box should send request with Enter key', () => {
     page.getSearchInput().sendKeys('JavaScript', protractor.Key.ENTER);
-    setTimeout(() => {}, 3000);
-    // const EC = protractor.ExpectedConditions;
-    // browser.wait(EC.visibilityOf(page.getAnalyticsBlock()), 10000);
+    // setTimeout(() => {}, 3000);
+    const EC = protractor.ExpectedConditions;
+    browser.wait(EC.presenceOf(page.getAnalyticsBlock()), 5000);
     expect(page.getAnalyticsBlock().isPresent()).toBe(true);
   });
 
