@@ -1,6 +1,6 @@
-# Use container-based environment with Ubuntu Trusty
+# Use non container-based environment (becouse of Docker) with Ubuntu Trusty
 dist: trusty
-sudo: false
+sudo: required
 
 language: node_js
 node_js:
@@ -33,9 +33,10 @@ script:
   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 
 before_deploy:
-  - gcloud --quiet version
-  - gcloud --quiet components update
-  - gcloud --quiet components update kubectl
+  - gcloud version
+  - sudo apt-get -qq update
+  - sudo apt-get -qq update google-cloud-sdk
+  - sudo apt-get -qq install kubectl
 
 deploy:
   - provider: script
