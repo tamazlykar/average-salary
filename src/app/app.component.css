@@ -23,7 +23,7 @@
   justify-content: center;
 }
 
-.serach {
+.search {
   display: flex;
   align-items: center;
   background: #FFF;
@@ -32,7 +32,7 @@
   border: 1px solid rgb(189, 189, 189);
 }
 
-.serach button {
+.search button {
   background-image: url(/assets/search.png);
   border: 0;
   width: 30px;
@@ -40,17 +40,17 @@
   background-size: cover;
 }
 
-.serach button:focus {
+.search button:focus {
   outline: none;
 }
 
-.serach input {
+.search input {
   border: 0;
   font-size: 16px;
   width: 300px;
 }
 
-.serach input:focus {
+.search input:focus {
   outline: none;
 }
 
