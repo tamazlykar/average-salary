@@ -1,6 +1,7 @@
 # Use non container-based environment (becouse of Docker) with Ubuntu Trusty
 dist: trusty
 sudo: required
+group: deprecated-2017Q4
 
 language: node_js
 node_js:
