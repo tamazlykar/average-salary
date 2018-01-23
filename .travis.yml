@@ -1,7 +1,6 @@
 # Use non container-based environment (becouse of Docker) with Ubuntu Trusty
 dist: trusty
 sudo: required
-group: deprecated-2017Q4
 
 language: node_js
 node_js:
@@ -34,12 +33,12 @@ script:
   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 
 before_deploy:
+  # Need supress script output becouse it produce Write error
+  # more info at https://github.com/travis-ci/travis-ci/issues/4704
   - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
       rm -rf ${HOME}/google-cloud-sdk;
       export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
-      # Need supress script output becouse it produce Write error
-      # more info at https://github.com/travis-ci/travis-ci/issues/4704
-      curl https://sdk.cloud.google.com | bash > /dev/null;
+      curl https://sdk.cloud.google.com | bash;
     fi
   - source ${HOME}/google-cloud-sdk/path.bash.inc
   - gcloud --quiet version
