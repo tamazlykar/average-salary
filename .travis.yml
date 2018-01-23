@@ -7,10 +7,11 @@ language: node_js
 node_js:
   - "8"
 
-# Cache node_modules between builds
+# Cache node_modules and gcloud SDK between builds
 cache:
   directories:
      - ./node_modules
+     - ${HOME}/google-cloud-sdk/
 
 services:
   - docker
@@ -29,13 +30,15 @@ install:
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
-  # - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
-  # - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+   - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 
 before_deploy:
   - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
       rm -rf ${HOME}/google-cloud-sdk;
       export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
+      # Need supress script output becouse it produce Write error
+      # more info at https://github.com/travis-ci/travis-ci/issues/4704
       curl https://sdk.cloud.google.com | bash > /dev/null;
     fi
   - source ${HOME}/google-cloud-sdk/path.bash.inc
@@ -45,7 +48,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: ./.continous-delivery/THROW_ERROR.sh
+    script: ./.continous-delivery/deploy.sh
     skip_cleanup: true
     on:
       branch: master
