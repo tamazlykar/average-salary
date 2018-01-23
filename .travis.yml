@@ -42,9 +42,9 @@ before_deploy:
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
 
-# deploy:
-#   - provider: script
-#     script: ./.continous-delivery/deploy.sh
-#     skip_cleanup: true
-#     on:
-#       branch: master
+deploy:
+  - provider: script
+    script: ./.continous-delivery/deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master
