@@ -6,7 +6,7 @@ language: node_js
 node_js:
   - "8"
 
-# Cache node_modules and gcloud SDK between builds
+# Cache node_modules between builds
 cache:
   directories:
      - ./node_modules
@@ -28,17 +28,23 @@ install:
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
-  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
-  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  # - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+  # - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 
 before_deploy:
-  - gcloud version
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install kubectl
+  - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
+      rm -rf ${HOME}/google-cloud-sdk;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
+      curl https://sdk.cloud.google.com | bash;
+    fi
+  - source ${HOME}/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components update
+  - gcloud --quiet components update kubectl
 
-deploy:
-  - provider: script
-    script: ./.continous-delivery/deploy.sh
-    skip_cleanup: true
-    on:
-      branch: master
+# deploy:
+#   - provider: script
+#     script: ./.continous-delivery/deploy.sh
+#     skip_cleanup: true
+#     on:
+#       branch: master
