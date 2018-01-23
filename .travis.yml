@@ -36,7 +36,7 @@ before_deploy:
   - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
       rm -rf ${HOME}/google-cloud-sdk;
       export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
-      curl https://sdk.cloud.google.com | bash;
+      curl https://sdk.cloud.google.com | bash > /dev/null;
     fi
   - source ${HOME}/google-cloud-sdk/path.bash.inc
   - gcloud --quiet version
@@ -45,7 +45,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: ./.continous-delivery/deploy.sh
+    script: ./.continous-delivery/THROW_ERROR.sh
     skip_cleanup: true
     on:
       branch: master
