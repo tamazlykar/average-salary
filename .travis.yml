@@ -10,7 +10,6 @@ node_js:
 cache:
   directories:
      - ./node_modules
-     - ${HOME}/google-cloud-sdk/
 
 services:
   - docker
@@ -35,7 +34,6 @@ script:
 before_deploy:
   - gcloud version
   - sudo apt-get -qq update
-  - sudo apt-get -qq update google-cloud-sdk
   - sudo apt-get -qq install kubectl
 
 deploy:
