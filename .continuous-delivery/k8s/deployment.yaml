@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: average-salary-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: average-salary
+  template:
+    metadata:
+      labels:
+        app: average-salary
+    spec:
+      containers:
+      - name: average-salary
+        image: gcr.io
+        ports:
+        - containerPort: 80

@@ -1,13 +1,27 @@
+# Use container-based environment with Ubuntu Trusty
 dist: trusty
 sudo: false
 
 language: node_js
 node_js:
-  - "8.2"
+  - "8"
 
+# Cache node_modules and gcloud SDK between builds
 cache:
   directories:
      - ./node_modules
+     - $HOME/google-cloud-sdk/
+
+services:
+  - docker
+
+env:
+  global:
+    - GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcloud-service-key.json
+    - PROJECT_ID=automated-development-process
+    - COMPUTE_ZONE=us-central1-a
+    - CLUSTER_NAME=cluster-1
+    - DOCKER_IMAGE_NAME=average-salary
 
 install:
   - npm install
@@ -17,3 +31,17 @@ script:
   - export CHROME_BIN=chromium-browser
   - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+
+before_deploy:
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components update
+  - gcloud --quiet components update kubectl
+
+deploy:
+  - provider: script
+    script: ./.continous-delivery/deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master

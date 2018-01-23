@@ -1,11 +1,13 @@
-# compiled output
 dist
-tmp
-sme
-
-# dependencies
 node_modules
-bower_components
+npm-debug.log
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.gitignore
+README.md
+LICENSE
 
 # IDEs and editors
 .idea
@@ -14,19 +16,6 @@ bower_components
 .classpath
 *.launch
 .settings/
-
-# misc
-.sass-cache
-connect.lock
-coverage/*
-libpeerconnection.log
-npm-debug.log
-testem.log
-typings
-
-# e2e
-e2e/*.js
-e2e/*.map
 
 #System Files
 .DS_Store
