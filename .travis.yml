@@ -10,7 +10,7 @@ node_js:
 cache:
   directories:
      - ./node_modules
-     - $HOME/google-cloud-sdk/
+     - ${HOME}/google-cloud-sdk/
 
 services:
   - docker
@@ -33,8 +33,12 @@ script:
   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 
 before_deploy:
-  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
-  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
+      rm -rf ${HOME}/google-cloud-sdk;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1;
+      curl https://sdk.cloud.google.com | bash;
+    fi
+  - source ${HOME}/google-cloud-sdk/path.bash.inc
   - gcloud --quiet version
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
