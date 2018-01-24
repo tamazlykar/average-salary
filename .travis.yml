@@ -23,16 +23,8 @@ env:
     - CLUSTER_NAME=cluster-1
     - DOCKER_IMAGE_NAME=average-salary
 
-install:
-  - npm install
-
-script:
-  # Use Chromium instead of Chrome.
-  - export CHROME_BIN=chromium-browser
-  # - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
-  # - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
-
-before_deploy:
+# Install gcloud SDK before script allows Travis to cache it
+before_install:
   # Need supress script output becouse it produce Write error
   # more info at https://github.com/travis-ci/travis-ci/issues/4704
   - if [ ! -d "${HOME}/google-cloud-sdk/bin" ]; then
@@ -41,11 +33,25 @@ before_deploy:
       curl https://sdk.cloud.google.com | bash > /dev/null;
     fi
   - source ${HOME}/google-cloud-sdk/path.bash.inc
+
+install:
+  - npm install
+
+script:
+  # Use Chromium instead of Chrome.
+  - export CHROME_BIN=chromium-browser
+  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+
+before_deploy:
   - gcloud --quiet version
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
 
 deploy:
+  # Script should be set to chmod u+x or chmod +x
+  # due to "Script failed with status 127"
+  # https://github.com/travis-ci/travis-ci/issues/5538
   - provider: script
     script: ./.continuous-delivery/deploy.sh
     skip_cleanup: true
