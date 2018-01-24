@@ -19,8 +19,8 @@ gcloud docker -- push gcr.io/${PROJECT_ID}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
 sed -i "s#gcr.io#gcr.io/${PROJECT_ID}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}#g" ./k8s/deployment.yaml
 
 # Create/update deployment and service on k8s
-kubectl apply -f './k8s/deployment.yaml'
-kubectl apply -f './k8s/service.yaml'
+kubectl apply -f ./.continuous-delivery/k8s/deployment.yaml
+kubectl apply -f ./.continuous-delivery/k8s/service.yaml
 
 # Print application URL
 echo http://`kubectl get service/average-salary --output=json | jq -r '.status.loadBalancer.ingress[0].ip'`
