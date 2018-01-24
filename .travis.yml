@@ -47,7 +47,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: sh ./.continous-delivery/deploy.sh
+    script: sh ./.continuous-delivery/deploy.sh
     skip_cleanup: true
     on:
       branch: master
