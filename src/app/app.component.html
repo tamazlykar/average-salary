@@ -4,7 +4,7 @@
       <h1>Average Salary</h1>
       <div class="center">
         <div class="search">
-          <input type="text" #searchBox (keyup.enter)="search(searchBox.value)">
+          <input type="text" #searchBox (keyup.enter)="search(searchBox.value)" placeholder="Введите профессию">
           <button (click)="search(searchBox.value)"></button>
         </div>
       </div>
