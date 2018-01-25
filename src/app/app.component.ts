@@ -12,12 +12,12 @@ import { Range } from './model/range';
 export class AppComponent {
   public vacancies: Vacancy[];
   public showAnalytics = false;
+  public showNoProfesssionMessage = false;
   public count: number;
   public minSalary: number;
   public maxSalary: number;
   public averageSalary: Range;
   public medianSalary: Range;
-
 
   constructor(private vacancyService: VacancyService, private analysisService: AnalysisService) {}
 
@@ -29,6 +29,7 @@ export class AppComponent {
       .subscribe(data =>  {
         if (!data || data.length === 0) {
           this.showAnalytics = false;
+          this.showNoProfesssionMessage = true;
           return;
         }
 
@@ -43,6 +44,8 @@ export class AppComponent {
     this.maxSalary = this.analysisService.getMaxSalary(vacancies);
     this.averageSalary = this.analysisService.getAverage(vacancies);
     this.medianSalary = this.analysisService.getMedian(vacancies);
+
+    this.showNoProfesssionMessage = false;
     this.showAnalytics = true;
   }
 }
