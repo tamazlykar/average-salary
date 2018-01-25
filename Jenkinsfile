@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'trion/ng-cli-e2e:1.6.4'
+      image 'bf2130487d04'
     }
   }
 
