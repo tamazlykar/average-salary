@@ -32,7 +32,7 @@ describe('StatUtils ', () => {
     });
 
     it('work for odd count array', () => {
-      expect(StatUtils.findMedian(arrOdd)).toBe(10);
+      expect(StatUtils.findMedian(arrOdd)).toBe(12);
     });
 
     it('work for array with irrational values', () => {
